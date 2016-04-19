@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+	<title>Insert App Name...</title>
+	<link rel="stylesheet" type="text/css" href="css/appStyle.css">
+</head>
+<body>
+	<table id="dynamicTable">
+		<th>Date</th>
+		<th>Lesson</th>
+	</table>
+	<br>
+	<form action="journal.html">
+    	<input type="submit" value="Add Entry">
+    </form>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/appScript.js"></script>
+	<script>
+		$(document).ready(function(){
+			//The data includes the journal entry and the lesson learned. 
+			//They are split up by the delimter "EEKKS"
+
+			displaySessionTable();
+			
+			//When the user clicks on a data, show the entry
+			$( ".Timestamp" ).on( "click", function( event ) {
+				  var key = this.innerHTML;
+				  console.log("key is " + key);
+				  //keyofkey will store timestamp key, which will be used
+				  //in recordedEntry.html
+				  localStorage.setItem("keyofkey", key);
+				  window.location.href = "recordedEntry.html";
+			});
+		});
+	</script>
+</body>
