@@ -33,10 +33,16 @@
 	
 		//Sets the html content to the journal entry and the lesson learned
 		$(document).ready(function(){
-			var timestamp = localStorage.getItem("keyofkey");
-			$("#dateOfEntry").html(timestamp);
-			var data = localStorage.getItem(timestamp);
-			// console.log(data);
+			var params = localStorage.getItem("keyofkey");
+			console.log(params);
+			var lst = params.split('</td><td>');
+			var key = lst[0].split('>')[1];
+			var lesson = lst[1].split('</td>')[0];
+			console.log(key);
+			console.log(lesson);
+			$("#dateOfEntry").html(key);
+			var data = localStorage.getItem(key);
+			console.log(data);
 			var parts = data.split("EEKKS");
 			var entry = parts[0];
 			var lines = entry.split("\n");
@@ -48,7 +54,6 @@
 				htmlString += "<br>";
 			}
 			$("#savedEntry").html(htmlString);
-			var lesson = parts[1];
 			$("#savedLesson").html(lesson);
 		});
 	</script>

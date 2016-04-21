@@ -9,18 +9,31 @@
 	
 	<!-- STYLESHEET -->
 	<link rel="stylesheet" type="text/css" href="css/appStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/dataTableStyle.css">
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+	
+	<!-- JQUERY LIBRARY -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+	<!-- DATATABLES LIBRARY -->
+	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+	
+	<script src="js/appScript.js"></script>
 </head>
 <body>
 	<h1>What I Learned</h1>
-	<input type="text" id="search" placeholder="Type to search">
-	<br><br>
+
 	<div style="height:25em;overflow:auto;">
-		<table id="dynamicTable">
-			<th>Date</th>
-			<th>Lesson</th>
+		<table id="dynamicTable" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Lesson</th>
+				</tr>
+			</thead>
 		</table>
 	</div>
-
+	
 	<br>	
 	<form class="twoButtons" action="index.html">
     	<input type="submit" value="Clear all Entries" onclick = clearData()>
@@ -30,35 +43,23 @@
     	<input type="submit" value="Add Entry">
     </form>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="js/appScript.js"></script>
-	<script>
+	<script>		
 		$(document).ready(function(){
 			//The data includes the journal entry and the lesson learned. 
 			//They are split up by the delimter "EEKKS"
+			var table = $('#dynamicTable').DataTable();
 	
 			console.log("number of recent entries: " + localStorage.journalCount);
 			displayMostRecent(Number(localStorage.journalCount));
 			
-			//When the user clicks on a data, show the entry
-			$( ".Timestamp" ).on( "click", function( event ) {
+			 $('#dynamicTable tbody').on( 'click', 'tr', function () {
 				  var key = this.innerHTML;
-				  console.log("key is " + key);
+				  // console.log("key is " + key);
 				  //keyofkey will store timestamp key, which will be used
 				  //in recordedEntry.html
 				  localStorage.setItem("keyofkey", key);
 				  window.location.href = "recordedEntry.html";
-			});
-			
-			var $rows = $('#dynamicTable tr');
-			$('#search').keyup(function() {
-			    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-			    
-			    $rows.show().filter(function() {
-			        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-			      return !~text.indexOf(val);
-			    }).hide();
-			});
+			} );
 		});
 	</script>
 </body>

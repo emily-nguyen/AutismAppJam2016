@@ -13,14 +13,16 @@ function addTableEntry(timestamp){
 	var data = localStorage.getItem(timestamp);
 	if(data!=null){
 		var lesson = data.split("EEKKS")[1];
-		$('#dynamicTable').prepend('<tr><td class="Timestamp">'+timestamp+'</td><td class="myLesson">'+lesson+'</td></tr>');	
+		// $('#dynamicTable').prepend('<tr><td class="Timestamp">'+timestamp+'</td><td class="myLesson">'+lesson+'</td></tr>');	
+		var table = $('#dynamicTable').DataTable();
+		table.row.add([timestamp, lesson]).draw(false);
 	}
 }
 
 //Displays the N most recently added entries,
 //even from previous sessions
 function displayMostRecent(n){
-	$('#dynamicTable th').remove();
+	// $('#dynamicTable th').remove();
 	for(var i=1; i<=n; i++){
 		var key = "temp" + i;
 		var timestamp = localStorage.getItem(key);
@@ -29,7 +31,7 @@ function displayMostRecent(n){
 			continue;
 		addTableEntry(timestamp);
 	}
-	$("#dynamicTable").prepend('<th>Date</th><th>Lesson</th>');
+	// $("#dynamicTable").prepend('<th>Date</th><th>Lesson</th>');
 }
 
 //Resets all the temp keys up to tempn
