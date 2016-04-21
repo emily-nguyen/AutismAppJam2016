@@ -97,24 +97,36 @@ function editSubmission(){
 	localStorage.setItem(timestamp,data);
 }
 
+function deleteRow(e) {
+	var table = $('#dynamicTable').DataTable();
+	table.row(',selected').remove().draw(false);
+}
+
 //Deletes the journal entry after user's confirmation
 $('#deleteButton').click(function(e)
 {
     if(confirm("Are you sure that you want to delete this entry?"))
     {
+		deleteRow(e);
+		
         //alert('Entry will be deleted.');
-        var timestamp = localStorage.getItem("keyofkey");
+       	var params = localStorage.getItem("keyofkey");
+		console.log(params);
+		var lst = params.split('</td><td>');
+		var key = lst[0].split('>')[1];
+		var lesson = lst[1].split('</td>')[0];
+		console.log(key, lesson);
         localStorage.totalCount = Number(localStorage.totalCount) - 1;
         //If the deleted entry was part of the home page table
         for(var i=1; i<=Number(localStorage.journalCount); i++){
         	var t = "temp" + i;
-        	if(localStorage.getItem(t) == timestamp){
+        	if(localStorage.getItem(t) == key){
         		reinitializeTemps(i, Number(localStorage.journalCount));
         		localStorage.journalCount = Number(localStorage.journalCount) - 1;
         		break;        
         	}
         }
-        localStorage.removeItem(timestamp);
+        localStorage.removeItem(key);
     }
     else
     {

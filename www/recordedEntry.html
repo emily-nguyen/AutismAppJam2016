@@ -8,6 +8,16 @@
 	
 	<!-- STYLESHEET -->
 	<link rel="stylesheet" type="text/css" href="css/appStyle.css"></head>
+	<link rel="stylesheet" type="text/css" href="css/dataTableStyle.css">
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+	
+	<!-- JQUERY LIBRARY -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+	<!-- DATATABLES LIBRARY -->
+	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+	
+	<script src="js/appScript.js"></script>
 <body>
 	
 	<h2 id="dateOfEntry"></h2>
@@ -27,10 +37,7 @@
 		<input type="submit" value="Edit">
 	</form>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="js/appScript.js"></script>
 	<script>
-	
 		//Sets the html content to the journal entry and the lesson learned
 		$(document).ready(function(){
 			var params = localStorage.getItem("keyofkey");

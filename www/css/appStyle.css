@@ -41,17 +41,6 @@ h1
   max-width: 20em;
 }
 
-table, th{
-	background-color: #F2EAD0;
-	font-family: Oswald, sans-serif;
-	text-align: center;
-}
-
-td{
-	font-family: Oxygen, sans-serif;
-	text-align: center;
-}
-
 /*
 table {
     border-collapse: collapse;
