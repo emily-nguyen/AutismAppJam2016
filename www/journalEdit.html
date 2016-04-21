@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <head>
-	<title>My Entry</title>
+	<title>Edit</title>
 	<!-- FONTS -->
 	<link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,400italic' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
 	
 	<!-- STYLESHEET -->
-	<link rel="stylesheet" type="text/css" href="css/appStyle.css"></head>
+	<link rel="stylesheet" type="text/css" href="css/appStyle.css">
+</head>
 <body>
 	
-	<h2 id="dateOfEntry"></h2>
-	<h3>Journal Entry</h3>
-	<p id="savedEntry"></p>
-	<h3>Lesson Learned</h3>
-	<p id="savedLesson"></p>
+	<h3>What I Learned</h3>
+	<textarea id="EditJournal" rows="10" cols="70" value="What happened?"></textarea>
+	<br>
+	<textarea id="EditLesson" rows="3" cols="70" value="What did you learn through this experience?"></textarea>
 	<br>
 	
-	<form class="threeButtons" action="index.html">
-		<input type="submit" value="Back">
+	<br>
+	<form class="twoButtons" action="recordedEntry.html">
+		<input type="submit" value="Cancel">
 	</form>
-	<form class="threeButtons" action="index.html" align="center">
-		<input id="deleteButton" type="submit" value="Delete">
-	</form>
-	<form class="threeButtons" action="journalEdit.html" align="right">
-		<input type="submit" value="Edit">
+	<form class="twoButtons" action="index.html" align="right">
+		<input type="submit" onclick="editSubmission()" value="Submit">
 	</form>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/appScript.js"></script>
 	<script>
-	
 		//Sets the html content to the journal entry and the lesson learned
 		$(document).ready(function(){
 			var timestamp = localStorage.getItem("keyofkey");
+			
 			$("#dateOfEntry").html(timestamp);
 			var data = localStorage.getItem(timestamp);
 			// console.log(data);
@@ -45,11 +43,14 @@
 			var htmlString = "";
 			for(var i=0; i<lines.length; i++){
 				htmlString += lines[i];
-				htmlString += "<br>";
+				//htmlString += "<br>";
 			}
-			$("#savedEntry").html(htmlString);
+			$("#EditJournal").val(entry);
 			var lesson = parts[1];
-			$("#savedLesson").html(lesson);
+			$("#EditLesson").val(lesson);
+			//for editing purposes...
+			
+			sessionStorage.setItem("editTime", timestamp);
 		});
 	</script>
 </body>
